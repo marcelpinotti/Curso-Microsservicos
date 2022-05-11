@@ -14,11 +14,15 @@ import java.util.Map;
 @Service
 public class PagamentoService {
 
-   //@Value("${rh-trabalhador.host}")
-    //private String trabalhadorHost;
+    /*
+    Implementação do RestTemplate
 
-    //@Autowired
-    //private RestTemplate restTemplate;
+    @Value("${rh-trabalhador.host}")
+    private String trabalhadorHost;
+
+    @Autowired
+    private RestTemplate restTemplate;
+     */
 
     @Autowired
     private TrabalhadorFeignClient feignClient;
@@ -26,10 +30,14 @@ public class PagamentoService {
 
     public Pagamento getPagamento(long trabalhadorId, int dias) {
 
-        //String trabalhadorIdStr = String.valueOf(trabalhadorId);
-        //Map<String, String> variaveisDaUri = new HashMap<>();
-        //variaveisDaUri.put("id", trabalhadorIdStr);
-        //Trabalhador trabalhador = restTemplate.getForObject(trabalhadorHost + "/trabalhadores/{id}", Trabalhador.class, variaveisDaUri);
+        /*
+        Implementação do RestTemplate
+
+        String trabalhadorIdStr = String.valueOf(trabalhadorId);
+        Map<String, String> variaveisDaUri = new HashMap<>();
+        variaveisDaUri.put("id", trabalhadorIdStr);
+        Trabalhador trabalhador = restTemplate.getForObject(trabalhadorHost + "/trabalhadores/{id}", Trabalhador.class, variaveisDaUri);
+         */
 
         Trabalhador trabalhador = feignClient.buscarPorId(trabalhadorId).getBody();
         return new Pagamento(trabalhador.getNome(), trabalhador.getValorPorDia(), dias);

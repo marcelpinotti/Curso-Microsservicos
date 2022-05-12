@@ -1,10 +1,12 @@
 package br.com.marcelpinotti.rhtrabalhadores.resources;
 
-import br.com.marcelpinotti.rhtrabalhadores.entities.Trabalhador;
+
 import br.com.marcelpinotti.rhtrabalhadores.repositories.TrabalhadorRepository;
+import br.com.marcelpinotti.rhtrabalhadores.entities.Trabalhador;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +20,9 @@ import java.util.List;
 @RequestMapping(value = "/trabalhadores")
 public class TrabalhadorResource {
 
+    @Value("${test.config}")
+    private String testConfigs;
+
     private static Logger logger = LoggerFactory.getLogger(TrabalhadorResource.class);
 
     @Autowired
@@ -26,6 +31,11 @@ public class TrabalhadorResource {
     @Autowired
     private Environment environment;
 
+    @GetMapping(value = "/configs")
+    public ResponseEntity<List<Void>> listaDeTrabalhadoresConfig(){
+        logger.info("CONFIG " + testConfigs);
+        return ResponseEntity.noContent().build();
+    }
     @GetMapping
     public ResponseEntity<List<Trabalhador>> listaDeTrabalhadores(){
         return ResponseEntity.ok().body(repository.findAll());

@@ -1,12 +1,9 @@
 package br.com.marcelpinotti.rhtrabalhadores.resources;
 
 
-import br.com.marcelpinotti.rhtrabalhadores.repositories.TrabalhadorRepository;
 import br.com.marcelpinotti.rhtrabalhadores.entities.Trabalhador;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import br.com.marcelpinotti.rhtrabalhadores.repositories.TrabalhadorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
@@ -22,10 +19,10 @@ import java.util.List;
 @RequestMapping(value = "/trabalhadores")
 public class TrabalhadorResource {
 
-    @Value("${test.config}")
-    private String testConfigs;
+    //@Value("${test.config}")
+    //private String testConfigs;
 
-    private static Logger logger = LoggerFactory.getLogger(TrabalhadorResource.class);
+    //private static Logger logger = LoggerFactory.getLogger(TrabalhadorResource.class);
 
     @Autowired
     private TrabalhadorRepository repository;
@@ -35,7 +32,7 @@ public class TrabalhadorResource {
 
     @GetMapping(value = "/configs")
     public ResponseEntity<List<Void>> listaDeTrabalhadoresConfig(){
-        logger.info("CONFIG " + testConfigs);
+        //logger.info("CONFIG " + testConfigs);
         return ResponseEntity.noContent().build();
     }
     @GetMapping
@@ -45,7 +42,7 @@ public class TrabalhadorResource {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<Trabalhador> buscarPorId(@PathVariable Long id){
-        logger.info("Port = " + environment.getProperty("local.server.port"));
+       // logger.info("Port = " + environment.getProperty("local.server.port"));
         return ResponseEntity.ok().body(repository.findById(id).get());
     }
 
